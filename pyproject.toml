@@ -1,0 +1,18 @@
+[project]
+name = "analytics-api"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.115.12",
+    "gunicorn>=23.0.0",
+    "psycopg[binary]>=3.2.9",
+    "pydantic>=2.11.5",
+    "python-decouple>=3.8",
+    "requests>=2.32.4",
+    "sqlalchemy>=2.0.41",
+    "sqlmodel>=0.0.24",
+    "timescaledb>=0.0.4",
+    "unicorn>=2.1.3",
+]

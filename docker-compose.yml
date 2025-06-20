@@ -1,0 +1,48 @@
+# yaml-language-server: $schema=./.vscode/docker-compose.schema.json
+
+services:
+  app:
+    image: analytics-api:v1
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8002:8002"
+    volumes:
+      - ./src:/code:rw
+    # environment:
+    #   - PORT=8002
+    #   - DATABASE_URL=postgresql+psycopg://time-user:time-pw@db:5432/timescaledb
+    #   - FLASK_APP=app.py
+    #   - FLASK_ENV=development
+    env_file:
+      - .env.compose
+    command: uvicorn main:app --host=0.0.0.0 --port=8002 --reload
+    develop:
+     watch:
+      #  - action: sync
+      #    path: ./src
+      #  - action: sync
+      #    path: ./requirements.txt
+       - action: rebuild
+         path: Dockerfile
+       - action: rebuild
+         path: pyproject.toml
+       - action: rebuild
+         path: docker-compose.yml
+  db:
+    image: timescale/timescaledb:latest-pg17
+    restart: always
+    environment:
+      POSTGRES_USER: time-user
+      POSTGRES_PASSWORD: time-pw
+      POSTGRES_DB: timescaledb
+    ports:
+      - 5432:5432
+    expose:
+      - 5432
+    volumes:
+      - timescale-db-data:/var/lib/postgresql/data
+
+volumes:
+  timescale-db-data:

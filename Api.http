@@ -1,0 +1,38 @@
+@base = http://localhost:8002
+@base = http://localhost:8999
+@events = /api/events
+
+### GET /
+GET {{base}}/
+
+
+### GET /healthz
+GET {{base}}/healthz
+
+
+### GET /api/events/
+GET {{base}}{{events}}
+Content-Type: application/json
+Cache-Control: no-cache
+
+
+### GET /api/events/{event_id}
+GET {{base}}{{events}}/2
+Content-Type: application/json
+
+### POST /api/events/
+POST {{base}}{{events}}/
+Content-Type: application/json
+
+{
+  "name": "TomHandleson6"
+}
+
+### PUT /api/events/
+PUT {{base}}{{events}}/3
+Content-Type: application/json
+
+{
+  "name": "Toms333",
+  "description": "Toms333 description"
+}
