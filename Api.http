@@ -11,7 +11,7 @@ GET {{base}}/healthz
 
 
 ### GET /api/events/
-GET {{base}}{{events}}
+GET {{base}}{{events}}?duration="1 day"&pages=/about&pages=/contact&pages=/pricing&pages=/pages
 Content-Type: application/json
 Cache-Control: no-cache
 
@@ -27,6 +27,11 @@ Content-Type: application/json
 {
   "name": "TomHandleson6"
 }
+
+### POST /api/events/batch
+POST {{base}}{{events}}/batch
+Content-Type: application/json
+
 
 ### PUT /api/events/
 PUT {{base}}{{events}}/3

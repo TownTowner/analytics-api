@@ -1,17 +1,18 @@
-from sqlmodel import create_engine, Session, SQLModel
-from api.db.config import DATABASE_URL
-
+from sqlmodel import Session, SQLModel
+from .config import DATABASE_URL, DB_TIMEZONE
+import timescaledb
 
 if DATABASE_URL == "":
     raise NotImplementedError("DATABASE_URL is not set")
 
-engine = create_engine(DATABASE_URL)
+engine = timescaledb.create_engine(DATABASE_URL, timezone=DB_TIMEZONE)
 
 
 def init_db():
+    print("init db")
     SQLModel.metadata.create_all(engine)
-    # session = Session(engine)
-    # return session
+    print("create timescaledb extension")
+    timescaledb.metadata.create_all(engine)
 
 
 def get_session():
