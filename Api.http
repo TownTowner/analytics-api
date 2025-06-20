@@ -11,7 +11,7 @@ GET {{base}}/healthz
 
 
 ### GET /api/events/
-GET {{base}}{{events}}?duration="1 day"&pages=/about&pages=/contact&pages=/pricing&pages=/pages
+GET {{base}}{{events}}?duration="1 day"&pages=/blog&pages=/login
 Content-Type: application/json
 Cache-Control: no-cache
 
@@ -23,21 +23,25 @@ Content-Type: application/json
 ### POST /api/events/
 POST {{base}}{{events}}/
 Content-Type: application/json
-
 {
+  "user_agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36",
+  "ip_address": "192.168.1.1",
+  "referrer": "https://www.google.com",
+  "session_id": "1234567890",
+  "duration": 12345,
   "name": "TomHandleson6"
 }
 
-### POST /api/events/batch
-POST {{base}}{{events}}/batch
+### POST /api/events/batchinsert
+POST {{base}}{{events}}/batchinsert
 Content-Type: application/json
 
 
-### PUT /api/events/
-PUT {{base}}{{events}}/3
-Content-Type: application/json
+# ### PUT /api/events/
+# PUT {{base}}{{events}}/3
+# Content-Type: application/json
 
-{
-  "name": "Toms333",
-  "description": "Toms333 description"
-}
+# {
+#   "name": "Toms333",
+#   "description": "Toms333 description"
+# }
